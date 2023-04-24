@@ -14,10 +14,13 @@ void swap(int *a,int *b);
 
 //排序函数
 void InsertSort(int list[],int n);          //直接插入排序
+void SelectSort(int list[],int n);          //简单选择排序
 void BubbleSort(int list[],int n);          //冒泡排序
 void DoubleBubbleSort(int list[],int n);    //双冒泡排序
 void JishuAheadOushu(int list[],int n);     //奇数在前偶数在后
-void SortFlagOfHeLan(int list[]);          //荷兰国旗排序
+void SortFlagOfHeLan(int list[]);           //荷兰国旗排序
+int FindMid(int list[],int n);
+int FindMidSelf(int list[],int n);
 
 //快速排序
 int Partition(int list[],int low,int high);

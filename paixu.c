@@ -149,3 +149,109 @@ void SortFlagOfHeLan(int list[])
         }
     }
 }
+
+void SelectSort(int list[],int n)//简单选择排序
+{
+    int i,j;
+    int min;
+    i = j = min = 0;
+    for(i = 0;i < n-1;i++){
+        min = i;
+        for(j = i;j<n;j++){
+            if(list[min] > list[j]){
+                min = j;
+            }
+        }
+        swap(&list[i],&list[min]);
+    }
+}
+
+int FindMid(int list[],int n)
+{
+    bool flag;
+    int low0,high0,low,high,k,i;
+    int pivot;int s1,s2;
+    s1 = s2 = 0;//有时候不是默认为0,需要自己赋值初值
+    high = n - 1;high0 = n - 1;
+    low = low0 = 0;
+    flag = true;
+    k = n/2;
+    while(flag){
+        pivot = list[low]; 
+        while(low < high){        
+            while(low < high && list[high] >= pivot){
+                --high;
+            }
+            if(low!=high)list[low] = list[high];
+            while(low < high && list[low] <= pivot){
+                ++low;
+            }
+            if(low!=high)list[high] = list[low];
+        }
+        list[low] = pivot;
+        if(low == k - 1){
+            flag = false;
+        }else{
+            if(low < k - 1){
+                low0 = ++low;
+                high = high0;
+            }else{
+                high0 = --high;
+                low = low0;
+            }
+        }
+    }
+    for(i = 0;i<k;i++){
+        s1+=list[i];
+    }
+    for(i = k;i<n;i++){
+        s2+=list[i];
+    }
+    return s2-s1;
+}
+
+int FindMidSelf(int list[],int n)//自己重新写一遍
+{
+    int high,low,high0,low0,k,i;
+    int s1,s2;
+    bool flag;
+    int pivot;
+
+    k = n/2 - 1;
+    s1 = s2 = 0;
+    high = high0 = n - 1;
+    low = low0 = 0;
+    flag = true;
+    while(flag){
+        pivot = list[low];
+        while(low < high){
+            while(low < high && list[high] > pivot){
+                --high;
+            }
+            list[low] = list[high];
+            while(low < high && list[low] < pivot){
+                ++low;
+            }
+            list[high] = list[low];
+        }
+        list[low] = pivot;
+        if(pivot = k){
+            flag = false;
+        }else{
+            if(pivot < k){
+                low0 = ++low;
+                high = high0;
+            }else{
+                high0 = --high;
+                low = low0;
+            }
+        }
+    }
+    for(i = 0;i<k+1;i++){
+        s1 = s1 + list[i];
+    }
+    for(i = k+1;i<n;i++){
+        s2 = s2 + list[i];
+    }
+    return s2 - s1;
+}
